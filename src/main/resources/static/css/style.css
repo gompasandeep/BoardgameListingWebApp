@@ -1,0 +1,19 @@
+body {
+    font-family: "Georgia", serif;
+}
+
+img#system-logo {
+    height: 100px;
+}
+
+.page-footer {
+    font-size: 10pt;
+}
+
+.page-header {
+    font-size: 24pt;
+}
+
+.error {
+    color: red;
+}

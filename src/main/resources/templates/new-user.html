@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add a User</title>
+    <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <h1>Add a User</h1>
+
+    <div id="error" class="error"></div>
+
+    <form name="form" action="#" th:action="@{/addUser}" method="post" onsubmit="return verify()">
+        <table>
+            <tr>
+                <td>User name:</td>
+                <td><input type="text" name="userName"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="text" name="password"></td>
+            </tr>
+            <tr th:each="authority:${authorities}">
+                <td><label th:for="${authority}" th:text="${authority}"></label></td>
+                <td><input type="checkbox" name="authorities" th:value="${authority}" th:id="${authority}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Add User"></td>
+            </tr>
+        </table>
+
+    </form>
+</body>
+
+</html>

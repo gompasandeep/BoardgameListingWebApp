@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add your boardgame</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <h1>Add your boardgame!</h1>
+
+    <form action="#" th:action="@{/boardgameAdded}" method="POST" th:object="${boardgame}">
+        Boardgame Name: <input type="text" name="name" th:field="*{name}">
+        <br>
+        <span title="1 - very easy, 2 - easy, 3 - medium, 4 - difficult, 5 - very difficult">Difficulty:</span> <input
+            type="range" name="level" min="1" max="5" step="1" th:field="*{level}" id="myRange"
+            oninput="this.nextElementSibling.value = this.value">
+        <output>1</output>
+        <br>
+        Minimum Players:
+        <select id="minPlayers" name="minPlayers" th:field="*{minPlayers}">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br>
+        Maximum Players:
+        <select id="maxPlayers" name="maxPlayers" th:field="*{maxPlayers}">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="+">+</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit the boardgame">
+    </form>
+
+    <p>Go back <a href="#" th:href="@{/}">Home</a></p>
+</body>
+
+</html>

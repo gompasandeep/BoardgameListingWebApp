@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Area!</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <h1>Welcome to the user's secured area</h1>
+
+    User's Name: <span sec:authentication="name"></span>
+    <br>
+    Roles: <span sec:authentication="principal.authorities"></span>
+    <br><br>
+    <ul>
+        <li>
+            Users can add boardgames
+        </li>
+        <li>
+            Users can write board game reviews
+        </li>
+    </ul>
+    <p>Go back <a href="#" th:href="@{/}">Home</a></p>
+    <form action="#" th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout">
+    </form>
+</body>
+
+</html>

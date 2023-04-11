@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Log In!</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <!-- <div th:if="${param.}" style="color: red;">
+        <p>Please Login to add reviews</p>
+    </div> -->
+    <div th:if="${param.error}" style="color: red;">
+        <p>Invalid User Name or Password</p>
+    </div>
+    <div th:if="${param.logout}" style="color: red;">
+        <p>You are now logged out</p>
+    </div>
+
+    <form action="#" th:action="@{/login}" method="post">
+        <p>User Name: <input type="text" name="username"></p>
+        <p>Password: <input type="text" name="password"></p>
+        <input type="submit" value="Log In">
+    </form>
+
+    <p>Join <a href="#" th:href="@{/newUser}"> Here </a></p>
+    <p><a href="/" th:href="@{/}">Back to index</a></p>
+</body>
+
+</html>

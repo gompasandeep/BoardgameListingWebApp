@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:fragment="html-head">
+    <meta charset="UTF-8">
+    <title>{Thymeleaf Fragments}</title>
+    <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- th:href references static folder directly/// -->
+    <div th:fragment="page-header">
+        <img id="system-logo" src="../../static/img/spring-boot-logo.png" th:src="@{/img/spring-boot-logo.png}">
+        <span class="page-header">Thymeleaf Fragments Example</span>
+    </div>
+</body>
+
+</html>
