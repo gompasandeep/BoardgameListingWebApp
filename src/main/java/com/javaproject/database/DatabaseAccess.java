@@ -92,7 +92,7 @@ public class DatabaseAccess {
     // }
     // }
 
-    public int addBoardGame(BoardGame boardgame) {
+    public Long addBoardGame(BoardGame boardgame) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         String query = "INSERT INTO boardgames (name, level, minPlayers, maxPlayers) VALUES (:name, :level, :minPlayers, :maxPlayers)";
         namedParameters
@@ -100,8 +100,10 @@ public class DatabaseAccess {
                 .addValue("level", boardgame.getLevel())
                 .addValue("minPlayers", boardgame.getMinPlayers())
                 .addValue("maxPlayers", boardgame.getMaxPlayers());
-
-        return jdbc.update(query, namedParameters);
+        KeyHolder generatedKey = new GeneratedKeyHolder();
+        int returnValue = jdbc.update(query, namedParameters, generatedKey);
+        Long studentId = (Long) generatedKey.getKey();
+        return (returnValue > 0) ? studentId : 0;
     }
 
     public int addReview(Review review) {
