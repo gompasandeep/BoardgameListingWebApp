@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import com.javaproject.beans.BoardGame;
@@ -74,6 +75,22 @@ public class DatabaseAccess {
             return reviews;
         }
     }
+
+    // public boolean userNameNotExist(String userName) {
+    // MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+
+    // String query = "SELECT * FROM users WHERE username = :username";
+    // namedParameters.addValue("username", userName);
+
+    // BeanPropertyRowMapper userMapper = new BeanPropertyRowMapper<>(User.class);
+    // List<User> users = jdbc.query(query, namedParameters, userMapper);
+    // // List<User> users = jdbc.query(query, namedParameters, userMapper);
+    // if (users.isEmpty()) {
+    // return true;
+    // } else {
+    // return false;
+    // }
+    // }
 
     public int addBoardGame(BoardGame boardgame) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
