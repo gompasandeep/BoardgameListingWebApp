@@ -23,8 +23,6 @@
                 th:text="|${boardgame.minPlayers} - ${boardgame.maxPlayers} Players|">Players</td>
             <td th:if="${boardgame.maxPlayers} == '+'" th:text="|${boardgame.minPlayers} +   Players|">Players
             </td>
-            <!-- <td th:text="|${boardgame.minPlayers} - ${boardgame.maxPlayers} Players|">Players
-            </td> -->
             <td><a href="#" th:href="@{/reviews/}+${boardgame.id}">View</a></td>
         </tr>
     </table>
