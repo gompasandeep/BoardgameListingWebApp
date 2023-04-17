@@ -5,24 +5,18 @@
 
 <body>
     <h1>Welcome to the BoardGame Database! 😎</h1>
+    <h2>Boardgame Lists</h2>
+    <div th:unless="${boardgames.empty}">
+        <ul th:each="boardgame : ${boardgames}">
+            <li>
+                <a href="#" th:href='@{|/${boardgame.id}|}'>
+                    <h3 th:text="${boardgame.name}">Name</h3>
+                </a>
+                <p th:text="|Level: ${boardgame.level}|">Level</p>
+            </li>
+        </ul>
+    </div>
 
-    <table th:unless="${boardgames.empty}">
-        <tr>
-            <th>Name</th>
-            <th title="1 - Very easy, 2 - Easy, 3 - Medium, 4 - Difficult, 5 - Very Difficult">Level</th>
-            <th>Players</th>
-            <th>Reviews</th>
-        </tr>
-        <tr th:each="boardgame : ${boardgames}">
-            <td th:text="${boardgame.name}">Name</td>
-            <td th:text="${boardgame.level}">Difficulty</td>
-            <td th:unless="${boardgame.maxPlayers} == '+'"
-                th:text="|${boardgame.minPlayers} - ${boardgame.maxPlayers} Players|">Players</td>
-            <td th:if="${boardgame.maxPlayers} == '+'" th:text="|${boardgame.minPlayers} +   Players|">Players
-            </td>
-            <td><a href="#" th:href="@{/reviews/}+${boardgame.id}">View</a></td>
-        </tr>
-    </table>
     <div th:if="${boardgames.empty}">
         <p>Currently there is no boardgame database exists.</p>
     </div>
