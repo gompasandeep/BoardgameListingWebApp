@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,11 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 
 import com.javaproject.beans.BoardGame;
 import com.javaproject.beans.Review;
-import com.javaproject.beans.Student;
 import com.javaproject.database.DatabaseAccess;
 
 @Controller
@@ -99,6 +96,7 @@ public class HomeController {
         return "/secured/addReview";
     }
 
+    // edit the review
     @GetMapping("/{gameId}/reviews/{id}")
     public String editReview(@PathVariable Long gameId, @PathVariable Long id, Model model) {
         Review review = da.getReview(id);
@@ -115,7 +113,7 @@ public class HomeController {
 
     @PostMapping("/boardgameAdded")
     public String boardgameAdded(@ModelAttribute BoardGame boardgame) {
-        int returnValue = da.addBoardGame(boardgame);
+        Long returnValue = da.addBoardGame(boardgame);
         System.out.println("return value is: " + returnValue);
         return "redirect:/";
     }

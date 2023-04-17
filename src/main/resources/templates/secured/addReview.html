@@ -11,7 +11,7 @@
         <div th:if="${review.id}">
             <input type="hidden" name="id" th:field="*{id}">
         </div>
-        <input type="textarea" name="text" th:field="*{text}">
+        <textarea name="text" th:field="*{text}"></textarea>
         <input type="hidden" name="gameId" th:value="${boardgame.id}">
         <br>
         <input type="submit" value="Submit the review">
