@@ -28,25 +28,6 @@ import com.javaproject.database.DatabaseAccess;
 @Controller
 public class HomeController {
 
-    // /**
-    // * call rest method and send info back to the template
-    // *
-    // * @param model to add info to that'll get passed to the view
-    // * @param restTemplate Helper class to easily invoke REST methods
-    // * @return
-    // */
-    // @GetMapping("/")
-    // public String goHome(Model model, RestTemplate restTemplate) {
-    // // use ResponseEntity to make the RESTful call & specify that we want this as
-    // an
-    // // array of Student
-    // ResponseEntity<Student[]> responseEntity =
-    // restTemplate.getForEntity("http://localhost:8080/students",
-    // Student[].class);
-    // model.addAttribute("students", responseEntity.getBody());
-    // return "view-student";
-    // }
-
     @Autowired
     DatabaseAccess da;
 
@@ -97,7 +78,13 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/reviews/{id}")
+    @GetMapping("/{id}")
+    public String getBoardgameDetail(@PathVariable Long id, Model model) {
+        model.addAttribute("boardgame", da.getBoardGame(id));
+        return "boardgame";
+    }
+
+    @GetMapping("/{id}/reviews")
     public String getReviews(@PathVariable Long id, Model model) {
         model.addAttribute("boardgame", da.getBoardGame(id));
         model.addAttribute("reviews", da.getReviews(id));
@@ -109,6 +96,14 @@ public class HomeController {
         model.addAttribute("boardgame", da.getBoardGame(id));
         model.addAttribute("review", new Review());
 
+        return "/secured/addReview";
+    }
+
+    @GetMapping("/{gameId}/reviews/{id}")
+    public String editReview(@PathVariable Long gameId, @PathVariable Long id, Model model) {
+        Review review = da.getReview(id);
+        model.addAttribute("review", review);
+        model.addAttribute("boardgame", da.getBoardGame(gameId));
         return "/secured/addReview";
     }
 
@@ -125,14 +120,6 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/editReview/{id}")
-    public String editReview(@PathVariable Long id, Model model) {
-        Review review = da.getReview(id);
-        model.addAttribute("review", review);
-        model.addAttribute("boardgame", da.getBoardGame(review.getGameId()));
-        return "/secured/addReview";
-    }
-
     @PostMapping("/reviewAdded")
     public String reviewAdded(@ModelAttribute Review review) {
         int returnValue;
@@ -144,7 +131,8 @@ public class HomeController {
             returnValue = da.addReview(review);
         }
         System.out.println("return value is: " + returnValue);
-        return "redirect:/reviews/" + review.getGameId();
+        return "redirect:/" + review.getGameId() +
+                "/reviews";
     }
 
     @GetMapping("/deleteReview/{id}")
@@ -152,7 +140,7 @@ public class HomeController {
         Long gameId = da.getReview(id).getGameId();
         int returnValue = da.deleteReview(id);
         System.out.println("return value is: " + returnValue);
-        return "redirect:/reviews/" + gameId;
+        return "redirect:/" + gameId + "/reviews";
     }
 
     @GetMapping("/user")
