@@ -18,7 +18,8 @@
         <tr th:each="review : ${reviews}">
             <td th:text="${review.text}">Review Text</td>
             <td>
-                <a sec:authorize="hasRole('ROLE_MANAGER')" href="#" th:href="@{/editReview/}+${review.id}">Edit</a>
+                <a sec:authorize="hasRole('ROLE_MANAGER')" href="#"
+                    th:href="@{|/${boardgame.id}/reviews/${review.id}|}">Edit</a>
                 <p sec:authorize="!hasRole('ROLE_MANAGER')" title="no authorization">-</p>
             </td>
             <td>
