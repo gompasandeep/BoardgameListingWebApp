@@ -68,7 +68,8 @@ public class HomeController {
     @PostMapping("/addUser")
     public String addUser(@RequestParam String userName, @RequestParam String password,
             @RequestParam String[] authorities, Model model) {
-
+        // if the username does not exist in database
+        // if (da.userNameNotExist(userName)) {
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
         for (String authority : authorities) {
@@ -83,6 +84,9 @@ public class HomeController {
 
         model.addAttribute("message", "User succesfully added");
         // return "/secured/gateway";
+        // } else {
+        // System.out.println("User already exists");
+        // }
         return "redirect:/";
     }
 
