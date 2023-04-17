@@ -2,11 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org"
     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <meta charset="UTF-8">
-    <title>User Area!</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
-</head>
+<head th:replace="fragments/header.html :: html-head(title='User Area!')"></head>
 
 <body>
     <h1>Welcome to the user's secured area</h1>
@@ -27,6 +23,9 @@
     <form action="#" th:action="@{/logout}" method="post">
         <input type="submit" value="Logout">
     </form>
+
+    <div th:include="fragments/links :: div.bottom-links"></div>
+    <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>
 
 </html>

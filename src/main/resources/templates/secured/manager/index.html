@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Manager's Secured Area</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
-</head>
+<head th:replace="fragments/header.html :: html-head(title='Managers Secured Area')"></head>
 
 <body>
     <h1>Welcome to the Manager's Secured Area!</h1>
@@ -21,12 +17,14 @@
             Managers can delete board game reviews
         </li>
     </ul>
-    <!-- <a href="#" th:href="@{/manager/new-user}">Add a User</a> -->
     <br><br>
     <p>Go back <a href="#" th:href="@{/}">Home</a></p>
     <form action="#" th:action="@{/logout}" method="post">
         <input type="submit" value="Logout">
     </form>
+
+    <div th:include="fragments/links :: div.bottom-links"></div>
+    <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>
 
 </html>

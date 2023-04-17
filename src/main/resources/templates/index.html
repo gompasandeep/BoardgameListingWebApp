@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Boardgame Home</title>
-</head>
+<head th:replace="fragments/header.html :: html-head(title='Boardgame Home')"></head>
+<!-- <div th:replace="fragments/footer.html :: page-footer(name='WonderWoman')"></div> -->
+
 
 <body>
     <h1>Welcome to the BoardGame Database! 😎</h1>
@@ -40,8 +39,8 @@
             <input type="submit" value="Logout">
         </form>
     </div>
-
-
+    <div th:include="fragments/links :: div.bottom-links"></div>
+    <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>
 
 </html>

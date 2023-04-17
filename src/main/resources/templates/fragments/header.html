@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 
-<head th:fragment="html-head">
+<head th:fragment="html-head(title)">
     <meta charset="UTF-8">
-    <title>{Thymeleaf Fragments}</title>
-    <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <title th:text="|${title}|">Title text</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
 </head>
 
 <body>

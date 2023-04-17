@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Boardgame Reviews</title>
-</head>
+<head th:replace="fragments/header.html :: html-head(title='Boardgame Reviews')"></head>
 
 <body>
     <h1 th:text="|User Reviews for ${boardgame.name}|">Reviews for the boardgame</h1>
@@ -40,6 +37,8 @@
         <p><a href="#" th:href="@{/secured/addReview/}+${boardgame.id}">Add a Review!</a></p>
     </div>
     <p>Go back <a href="#" th:href="@{/}">Home</a></p>
+    <div th:include="fragments/links :: div.bottom-links"></div>
+    <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>
 
 </html>

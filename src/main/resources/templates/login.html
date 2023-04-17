@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Log In!</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
-</head>
+<head th:replace="fragments/header.html :: html-head(title='Log In!')"></head>
 
 <body>
-    <!-- <div th:if="${param.}" style="color: red;">
-        <p>Please Login to add reviews</p>
-    </div> -->
+    <h1>Please Login</h1>
     <div th:if="${param.error}" style="color: red;">
         <p>Invalid User Name or Password</p>
     </div>
@@ -26,6 +20,9 @@
 
     <p>Join <a href="#" th:href="@{/newUser}"> Here </a></p>
     <p><a href="/" th:href="@{/}">Back to index</a></p>
+
+    <div th:include="fragments/links :: div.bottom-links"></div>
+    <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>
 
 </html>
