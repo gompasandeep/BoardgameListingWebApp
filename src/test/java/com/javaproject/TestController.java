@@ -17,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
 
+import com.javaproject.beans.BoardGame;
+import com.javaproject.beans.Review;
 import com.javaproject.database.DatabaseAccess;
 
 @SpringBootTest
@@ -36,59 +38,66 @@ class TestController {
         this.mockMvc = mockMvc;
     }
 
-    // @Test
-    // public void testRoot() throws Exception {
-    // mockMvc.perform(get("/"))
-    // .andExpect(status().isOk())
-    // .andExpect(view().name("index"));
-    // }
+    @Test
+    public void testRoot() throws Exception {
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"));
+    }
 
-    // @Test
-    // public void testUpdateAvenger() throws Exception {
-    // List<Avenger> avengers = da.getAvengers();
-    // Avenger avenger = avengers.get(0);
-    // Long id = avenger.getId();
-    // avenger.setName("Star-Lord");
+    @Test
+    public void testAddBoardGame() throws Exception {
+        LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
 
-    // mockMvc.perform(post("/updateAvenger").flashAttr("avenger", avenger))
-    // .andExpect(status().isFound())
-    // .andExpect(redirectedUrl("/"));
+        requestParams.add("name", "onecard");
+        requestParams.add("level", "1");
+        requestParams.add("minPlayers", "2");
+        requestParams.add("maxPlayers", "+");
 
-    // avenger = da.getAvenger(id);
-    // assertEquals(avenger.getName(), "Star-Lord");
-    // }
+        int origSize = da.getBoardGames().size();
+        mockMvc.perform(post("/boardgameAdded").params(requestParams))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/"))
+                .andDo(print());
+        int newSize = da.getBoardGames().size();
+        assertEquals(newSize, origSize + 1);
+    }
 
-    // @Test
-    // public void testAddAvenger() throws Exception {
-    // LinkedMultiValueMap<String, String> requestParams = new
-    // LinkedMultiValueMap<>();
+    @Test
+    public void testEditReview() throws Exception {
+        List<BoardGame> boardGames = da.getBoardGames();
+        Long boardgameId = boardGames.get(0).getId();
 
-    // requestParams.add("name", "Gamora");
-    // requestParams.add("age", "26");
+        List<Review> reviews = da.getReviews(boardgameId);
+        Review review = reviews.get(0);
+        Long reviewId = review.getId();
 
-    // int origSize = da.getAvengers().size();
-    // mockMvc.perform(post("/add").params(requestParams))
-    // .andExpect(status().isFound())
-    // .andExpect(redirectedUrl("/"))
-    // .andDo(print());
-    // int newSize = da.getAvengers().size();
-    // assertEquals(newSize, origSize + 1);
-    // }
+        review.setText("Edited text");
 
-    // @Test
-    // public void testDeleteAvenger() throws Exception {
-    // List<Avenger> avengers = da.getAvengers();
+        mockMvc.perform(post("/reviewAdded").flashAttr("review", review))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/reviews/" + review.getGameId()));
 
-    // int origSize = avengers.size();
-    // Avenger avenger = avengers.get(0);
-    // Long id = avenger.getId();
+        review = da.getReview(reviewId);
+        assertEquals(review.getText(), "Edited text");
+    }
 
-    // mockMvc.perform(get("/deleteAvenger/{id}", id))
-    // .andExpect(status().isFound())
-    // .andExpect(redirectedUrl("/"));
+    @Test
+    public void testDeleteReview() throws Exception {
+        List<BoardGame> boardGames = da.getBoardGames();
+        Long boardgameId = boardGames.get(0).getId();
 
-    // int newSize = da.getAvengers().size();
+        List<Review> reviews = da.getReviews(boardgameId);
+        Long reviewId = reviews.get(0).getId();
 
-    // assertEquals(newSize, origSize - 1);
-    // }
+        int origSize = reviews.size();
+
+        mockMvc.perform(get("/deleteReview/{id}", reviewId))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/reviews/" + boardgameId));
+
+        int newSize = da.getReviews(boardgameId).size();
+
+        assertEquals(newSize, origSize - 1);
+    }
 }

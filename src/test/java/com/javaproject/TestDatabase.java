@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.javaproject.beans.BoardGame;
+import com.javaproject.beans.Review;
 import com.javaproject.database.DatabaseAccess;
 
 @SpringBootTest
@@ -22,29 +24,51 @@ class TestDatabase {
         this.da = da;
     }
 
-    // @Test
-    // public void testDatabaseAdd() {
-    // Avenger avenger = new Avenger();
-    // avenger.setName("Starlight");
-    // avenger.setAge(22);
+    @Test
+    public void testDatabaseAddBoardGame() {
+        BoardGame boardGame = new BoardGame();
+        boardGame.setName("onecard");
+        boardGame.setLevel(1);
+        boardGame.setMinPlayers(2);
+        boardGame.setMaxPlayers("+");
 
-    // int originalSize = da.getAvengers().size();
+        int originalSize = da.getBoardGames().size();
 
-    // da.addAvenger(avenger);
-    // int newSize = da.getAvengers().size();
+        da.addBoardGame(boardGame);
+        int newSize = da.getBoardGames().size();
 
-    // assertEquals(newSize, originalSize + 1);
-    // }
+        assertEquals(newSize, originalSize + 1);
+    }
 
-    // @Test
-    // public void testDatabasedelete() {
-    // List<Avenger> avengers = da.getAvengers();
-    // Long id = avengers.get(0).getId();
-    // int originalSize = da.getAvengers().size();
+    @Test
+    public void testDatabaseAddReview() {
+        List<BoardGame> boardGames = da.getBoardGames();
+        Long boardgameId = boardGames.get(0).getId();
 
-    // da.deleteAvenger(id);
-    // int newSize = da.getAvengers().size();
-    // assertEquals(newSize, originalSize - 1);
-    // }
+        Review review = new Review();
+        review.setGameId(boardgameId);
+        review.setText("This is review text");
 
+        int originalSize = da.getReviews(boardgameId).size();
+
+        da.addReview(review);
+        int newSize = da.getReviews(boardgameId).size();
+
+        assertEquals(newSize, originalSize + 1);
+    }
+
+    @Test
+    public void testDatabaseDeleteReview() {
+        List<BoardGame> boardGames = da.getBoardGames();
+        Long boardgameId = boardGames.get(0).getId();
+
+        List<Review> reviews = da.getReviews(boardgameId);
+        Long reviewId = reviews.get(0).getId();
+
+        int originalSize = da.getReviews(boardgameId).size();
+
+        da.deleteReview(reviewId);
+        int newSize = da.getReviews(boardgameId).size();
+        assertEquals(newSize, originalSize - 1);
+    }
 }
