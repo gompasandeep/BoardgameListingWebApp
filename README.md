@@ -7,5 +7,5 @@ The board game database Full-Stack web application displays the lists of board g
 <li>JUnit Test to test the routing in Controller and functions in Database </li>
 <li>Implemented Spring MVC best practices to segregate the roles of views, controllers, and database package</li>
 <li>Added schema.sql file to customize the schema and input the initial data and enabled to manage them using JDBC and CRUD operation</li>
-<li>Thymeleaf Fragments to reduce redundancy of repeating header/ footer</li>
+<li>Thymeleaf Fragments to reduce redundancy of repeating HTML elements including head, footer, and navigation</li>
 </ul>
