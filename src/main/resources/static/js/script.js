@@ -53,7 +53,6 @@ function verifyBoardGame() {
         } else {
             return true;
         }
-        return true;
 
     }
     catch (err) {
