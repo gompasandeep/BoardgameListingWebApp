@@ -39,27 +39,6 @@ function verify() {
     }
 }
 
-function verifyBoardGame() {
-    try {
-        var minPlayers = document.forms['form']['minPlayers'].value;
-        var maxPlayers = document.forms['form']['maxPlayers'].value;
-
-        console.log(typeof (minPlayers));
-        console.log(typeof (maxPlayers));
-
-        if (minPlayers >= maxPlayers) {
-            document.getElementById("error-boardgame").innerHTML = "The maximum players should be larger than minimum players.";
-            return false;
-        } else {
-            return true;
-        }
-
-    }
-    catch (err) {
-        alert(err);
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('ROLE_MANAGER').onclick = function () {
         var userCheckbox = document.getElementById('ROLE_USER');
