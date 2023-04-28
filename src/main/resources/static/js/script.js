@@ -47,12 +47,12 @@ function verifyBoardGame() {
         console.log(typeof (minPlayers));
         console.log(typeof (maxPlayers));
 
-        // if (minPlayers >= maxPlayers) {
-        //     document.getElementById("error-boardgame").innerHTML = "The maximum players should be larger than minimum players.";
-        //     return false;
-        // } else {
-        //     return true;
-        // }
+        if (minPlayers >= maxPlayers) {
+            document.getElementById("error-boardgame").innerHTML = "The maximum players should be larger than minimum players.";
+            return false;
+        } else {
+            return true;
+        }
         return true;
 
     }
