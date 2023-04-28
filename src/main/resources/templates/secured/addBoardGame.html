@@ -6,7 +6,10 @@
 <body>
     <h1>Add your boardgame!</h1>
 
-    <form action="#" th:action="@{/boardgameAdded}" method="POST" th:object="${boardgame}">
+    <div id="error-boardgame" class="error-boardgame"></div>
+
+    <form action="#" th:action="@{/boardgameAdded}" method="POST" th:object="${boardgame}"
+        onsubmit="return verifyBoardGame()">
         Boardgame Name: <input type="text" name="name" th:field="*{name}">
         <br>
         <span title="1 - very easy, 2 - easy, 3 - medium, 4 - difficult, 5 - very difficult">Difficulty:</span> <input
