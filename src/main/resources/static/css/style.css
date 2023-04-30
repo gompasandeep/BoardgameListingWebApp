@@ -1,18 +1,5 @@
 body {
-    margin: auto;
-    padding: 30px;
-}
-
-img#system-logo {
-    height: 100px;
-}
-
-.page-footer {
-    font-size: 10pt;
-}
-
-.page-header {
-    font-size: 24pt;
+    padding: 50px;
 }
 
 .error {
@@ -24,7 +11,8 @@ textarea {
     height: 10rem;
 }
 
-ul>li {
+
+td {
     background-color: #e0e0e0;
     border-radius: 8px;
     padding: 1rem 2rem;
