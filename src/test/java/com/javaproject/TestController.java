@@ -76,7 +76,7 @@ class TestController {
 
         mockMvc.perform(post("/reviewAdded").flashAttr("review", review))
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/reviews/" + review.getGameId()));
+                .andExpect(redirectedUrl("/" + review.getGameId() + "/reviews"));
 
         review = da.getReview(reviewId);
         assertEquals(review.getText(), "Edited text");
@@ -94,7 +94,7 @@ class TestController {
 
         mockMvc.perform(get("/deleteReview/{id}", reviewId))
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/reviews/" + boardgameId));
+                .andExpect(redirectedUrl("/" + boardgameId + "/reviews"));
 
         int newSize = da.getReviews(boardgameId).size();
 
