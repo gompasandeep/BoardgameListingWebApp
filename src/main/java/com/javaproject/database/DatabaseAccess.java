@@ -76,22 +76,6 @@ public class DatabaseAccess {
         }
     }
 
-    // public boolean userNameNotExist(String userName) {
-    // MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-
-    // String query = "SELECT * FROM users WHERE username = :username";
-    // namedParameters.addValue("username", userName);
-
-    // BeanPropertyRowMapper userMapper = new BeanPropertyRowMapper<>(User.class);
-    // List<User> users = jdbc.query(query, namedParameters, userMapper);
-    // // List<User> users = jdbc.query(query, namedParameters, userMapper);
-    // if (users.isEmpty()) {
-    // return true;
-    // } else {
-    // return false;
-    // }
-    // }
-
     public Long addBoardGame(BoardGame boardgame) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         String query = "INSERT INTO boardgames (name, level, minPlayers, maxPlayers) VALUES (:name, :level, :minPlayers, :maxPlayers)";
@@ -136,14 +120,6 @@ public class DatabaseAccess {
         }
     }
 
-    // public boolean reviewExists(Long id) {
-    // MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-
-    // String query = "SELECT * FROM reviews WHERE id = :id";
-    // namedParameters.addValue("id", id);
-
-    // }
-
     public int editReview(Review review) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
 
@@ -155,14 +131,4 @@ public class DatabaseAccess {
                 .addValue("id", review.getId());
         return jdbc.update(query, namedParameters);
     }
-
-    // public int addStudent(Student student) {
-    // MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-
-    // String query = "INSERT INTO students (username) VALUES (:username)";
-
-    // namedParameters.addValue("username", student.getUserName());
-
-    // return jdbc.update(query, namedParameters);
-    // }
 }
