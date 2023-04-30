@@ -4,17 +4,20 @@
 <head th:replace="fragments/header.html :: html-head(title='Boardgame Home')"></head>
 
 <body>
-    <h1>Welcome to the BoardGame Database! 😎</h1>
-    <h2>Boardgame Lists</h2>
-    <div th:unless="${boardgames.empty}" class="container text-center">
-        <ul th:each="boardgame : ${boardgames}">
-            <li>
-                <a href="#" th:href='@{|/${boardgame.id}|}'>
-                    <h3 th:text="${boardgame.name}">Name</h3>
-                </a>
-                <p th:text="|Level: ${boardgame.level}|">Level</p>
-            </li>
-        </ul>
+    <h2>Welcome to the BoardGame Database! 😎</h2>
+    <h3>Boardgame Lists</h3>
+    <div th:unless="${boardgames.empty}" class="container my-auto text-center">
+        <table>
+            <tr th:each="boardgame : ${boardgames}">
+                <td>
+                    <a href="#" th:href='@{|/${boardgame.id}|}'>
+                        <h4 th:text="${boardgame.name}">Name</h4>
+                    </a>
+                    <p th:text="|Level: ${boardgame.level}|">Level</p>
+                </td>
+            </tr>
+        </table>
+
     </div>
 
     <div th:if="${boardgames.empty}">
@@ -22,8 +25,8 @@
     </div>
 
     <div sec:authorize="!hasRole('ROLE_USER')">
-        <h2>For more services, please login <a href="#" th:href="@{/login}">here</a></h2>
-        <h2>To join to the service, <a href="#" th:href="@{/newUser}">Click</a> here</h2>
+        <h5>For more services, please login <a href="#" th:href="@{/login}">here</a></h5>
+        <h5>To join to the service, <a href="#" th:href="@{/newUser}">Click</a> here</h5>
     </div>
     <div sec:authorize="hasRole('ROLE_USER') || hasRole('ROLE_MANAGER')">
         <p>Click <a href="#" th:href="@{/secured/addBoardGame}">Here</a> to add a boardgame!</p>
