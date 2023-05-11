@@ -7,9 +7,33 @@
 </head>
 
 <body>
+    <div class="header-links container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <span class="fs-1">Welcome to the BoardGame Database! 😎</span>
+            </div>
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#" th:href="@{/}" class="nav-link active" aria-current="page">Home</a>
+                </li>
+                <li sec:authorize="!hasRole('ROLE_USER')" class="nav-item"><a href="#" th:href="@{/login}"
+                        class="nav-link">Login</a></li>
+                <li sec:authorize="!hasRole('ROLE_USER')" class="nav-item"><a href="#" th:href="@{/newUser}"
+                        class="nav-link">Sign-up</a></li>
+                <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
+                    <form action="#" th:action="@{/logout}" method="post">
+                        <input class="nav-link" type="submit" value="Logout">
+                    </form>
+                </li>
+            </ul>
+        </header>
+        <div class="b-example-divider"></div>
+    </div>
+
     <div class="bottom-links">
-        <a href="#">About Us</a> &nbsp;
-        <a href="#">Contact Us</a>
+        <div class="d-flex flex-wrap justify-content-center pt-3">
+            <a href="#">About Us</a> &nbsp;
+            <a href="#">Contact Us</a>
+        </div>
     </div>
 </body>
 

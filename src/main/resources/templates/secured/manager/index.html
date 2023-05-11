@@ -4,25 +4,28 @@
 <head th:replace="fragments/header.html :: html-head(title='Managers Secured Area')"></head>
 
 <body>
-    <h1>Welcome to the Manager's Secured Area!</h1>
-    User's Name: <span sec:authentication="name"></span>
-    <br>
-    Roles: <span sec:authentication="principal.authorities"></span>
-    <br><br>
-    <ul>
-        <li>
-            Managers can edit board game reviews
-        </li>
-        <li>
-            Managers can delete board game reviews
-        </li>
-    </ul>
-    <br><br>
-    <p>Go back <a href="#" th:href="@{/}">Home</a></p>
-    <form action="#" th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout">
-    </form>
+    <div th:replace="fragments/links :: div.header-links"></div>
 
+    <main class="container">
+        <h1>Welcome to the Manager's Secured Area!</h1>
+        User's Name: <span sec:authentication="name"></span>
+        <br>
+        Roles: <span sec:authentication="principal.authorities"></span>
+        <br><br>
+        <ul>
+            <li>
+                Managers can edit board game reviews
+            </li>
+            <li>
+                Managers can delete board game reviews
+            </li>
+        </ul>
+        <br><br>
+        <p>Go back <a href="#" th:href="@{/}">Home</a></p>
+        <form action="#" th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+        </form>
+    </main>
     <div th:include="fragments/links :: div.bottom-links"></div>
     <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>

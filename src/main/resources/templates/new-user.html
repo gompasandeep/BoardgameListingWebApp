@@ -14,31 +14,41 @@
 </head>
 
 <body>
-    <h1>Add a User</h1>
+    <div th:replace="fragments/links :: div.header-links"></div>
+    <main class="container">
+        <div class="p-4 p-md-5 mb-4 border rounded text-center">
+            <h1 class="my-2 pb-3">Add a User</h1>
 
-    <div id="error" class="error"></div>
+            <div id="error" class="error"></div>
 
-    <form name="form" action="#" th:action="@{/addUser}" method="post" onsubmit="return verify()">
-        <table>
-            <tr>
-                <td>User name:</td>
-                <td><input type="text" name="userName"></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="text" name="password"></td>
-            </tr>
-            <tr th:each="authority:${authorities}">
-                <td><label th:for="${authority}" th:text="${authority}"></label></td>
-                <td><input type="checkbox" name="authorities" th:value="${authority}" th:id="${authority}"></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="Add User"></td>
-            </tr>
-        </table>
-    </form>
-    <p><a href="/" th:href="@{/}">Back to Home</a></p>
-
+            <form name="form" action="#" th:action="@{/addUser}" method="post" onsubmit="return verify()">
+                <div class="form-group row justify-content-center my-2">
+                    <label for="inputUserName" class="col-sm-2 col-form-label">User name:</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="userName" class="form-control" id="inputUserName"
+                            placeholder="Enter Username">
+                    </div>
+                </div>
+                <div class="form-group row justify-content-center my-2">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="password" class="form-control" id="inputPassword"
+                            placeholder="Enter Password">
+                    </div>
+                </div>
+                <div class="form-group row justify-content-center my-2" th:each="authority:${authorities}">
+                    <label th:for="${authority}" th:text="${authority}" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-4">
+                        <input type="checkbox" name="authorities" th:value="${authority}" th:id="${authority}">
+                    </div>
+                </div>
+                <input type="submit" value="Add User" class="btn btn-primary m-2 pb-2">
+            </form>
+            <div class="container text-center my-2">
+                <h5><a href="/" th:href="@{/}">Back to Home</a></h5>
+            </div>
+        </div>
+    </main>
     <div th:include="fragments/links :: div.bottom-links"></div>
     <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>

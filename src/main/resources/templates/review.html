@@ -4,40 +4,44 @@
 <head th:replace="fragments/header.html :: html-head(title='Boardgame Reviews')"></head>
 
 <body>
-    <h1 th:text="|User Reviews for ${boardgame.name}|">Reviews for the boardgame</h1>
+    <div th:replace="fragments/links :: div.header-links"></div>
+    <main class="container">
+        <h1 th:text="|User Reviews for ${boardgame.name}|">Reviews for the boardgame</h1>
 
-    <div th:unless="${reviews}">
-        <p>There is no review for the boardgame.</p>
-    </div>
-    <table th:if="${reviews}">
-        <tr>
-            <th>Review</th>
-            <th title="Only the manager can edit & delete">Edit</th>
-            <th title="Only the manager can edit & delete">Delete</th>
-        </tr>
-        <tr th:each="review : ${reviews}">
-            <td th:text="${review.text}">Review Text</td>
-            <td>
-                <a sec:authorize="hasRole('ROLE_MANAGER')" href="#"
-                    th:href="@{|/${boardgame.id}/reviews/${review.id}|}">Edit</a>
-                <p sec:authorize="!hasRole('ROLE_MANAGER')" title="no authorization">-</p>
-            </td>
-            <td>
-                <a sec:authorize="hasRole('ROLE_MANAGER')" href="#" th:href="@{/deleteReview/}+${review.id}">Delete</a>
-                <p sec:authorize="!hasRole('ROLE_MANAGER')" title="no authorization">-</p>
-            </td>
-        </tr>
-    </table>
-    <div sec:authorize="!hasRole('ROLE_MANAGER')">
-        <p>** Only the users with manager role can edit/ delete the reviews **</p>
-    </div>
-    <div sec:authorize="!hasRole('ROLE_USER')">
-        <p>To write reviews, please login <a href="#" th:href="@{/secured}">here</a></p>
-    </div>
-    <div sec:authorize="hasRole('ROLE_USER')">
-        <p><a href="#" th:href="@{/secured/addReview/}+${boardgame.id}">Add a Review!</a></p>
-    </div>
-    <p>Go back <a href="#" th:href="@{/}">Home</a></p>
+        <div th:unless="${reviews}">
+            <p>There is no review for the boardgame.</p>
+        </div>
+        <table th:if="${reviews}">
+            <tr>
+                <th>Review</th>
+                <th title="Only the manager can edit & delete">Edit</th>
+                <th title="Only the manager can edit & delete">Delete</th>
+            </tr>
+            <tr th:each="review : ${reviews}">
+                <td th:text="${review.text}">Review Text</td>
+                <td>
+                    <a sec:authorize="hasRole('ROLE_MANAGER')" href="#"
+                        th:href="@{|/${boardgame.id}/reviews/${review.id}|}">Edit</a>
+                    <p sec:authorize="!hasRole('ROLE_MANAGER')" title="no authorization">-</p>
+                </td>
+                <td>
+                    <a sec:authorize="hasRole('ROLE_MANAGER')" href="#"
+                        th:href="@{/deleteReview/}+${review.id}">Delete</a>
+                    <p sec:authorize="!hasRole('ROLE_MANAGER')" title="no authorization">-</p>
+                </td>
+            </tr>
+        </table>
+        <div sec:authorize="!hasRole('ROLE_MANAGER')">
+            <p>** Only the users with manager role can edit/ delete the reviews **</p>
+        </div>
+        <div sec:authorize="!hasRole('ROLE_USER')">
+            <p>To write reviews, please login <a href="#" th:href="@{/secured}">here</a></p>
+        </div>
+        <div sec:authorize="hasRole('ROLE_USER')">
+            <p><a href="#" th:href="@{/secured/addReview/}+${boardgame.id}">Add a Review!</a></p>
+        </div>
+        <p>Go back <a href="#" th:href="@{/}">Home</a></p>
+    </main>
     <div th:include="fragments/links :: div.bottom-links"></div>
     <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>

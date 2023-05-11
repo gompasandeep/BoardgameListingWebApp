@@ -10,11 +10,3 @@ textarea {
     width: 50rem;
     height: 10rem;
 }
-
-
-td {
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    padding: 1rem 2rem;
-    width: 70%;
-}

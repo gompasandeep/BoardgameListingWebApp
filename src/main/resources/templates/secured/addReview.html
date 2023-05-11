@@ -4,21 +4,23 @@
 <head th:replace="fragments/header.html :: html-head(title='Add your boardgame Reviews')"></head>
 
 <body>
-    <h1 th:unless="${review.id}" th:text="|Leave a review for ${boardgame.name}|">Leave a review</h1>
-    <h1 th:if="${review.id}" th:text="|Edit reviews for ${boardgame.name}|">Edit reviews</h1>
+    <div th:replace="fragments/links :: div.header-links"></div>
+    <main class="container">
+        <h1 th:unless="${review.id}" th:text="|Leave a review for ${boardgame.name}|">Leave a review</h1>
+        <h1 th:if="${review.id}" th:text="|Edit reviews for ${boardgame.name}|">Edit reviews</h1>
 
-    <form action="#" th:action="@{/reviewAdded}" method="POST" th:object="${review}">
-        <div th:if="${review.id}">
-            <input type="hidden" name="id" th:field="*{id}">
-        </div>
-        <textarea name="text" th:field="*{text}"></textarea>
-        <input type="hidden" name="gameId" th:value="${boardgame.id}">
-        <br>
-        <input type="submit" value="Submit the review">
-    </form>
+        <form action="#" th:action="@{/reviewAdded}" method="POST" th:object="${review}">
+            <div th:if="${review.id}">
+                <input type="hidden" name="id" th:field="*{id}">
+            </div>
+            <textarea name="text" th:field="*{text}"></textarea>
+            <input type="hidden" name="gameId" th:value="${boardgame.id}">
+            <br>
+            <input type="submit" value="Submit the review">
+        </form>
 
-    <p>Go back <a href="#" th:href="@{/}">Home</a></p>
-
+        <p>Go back <a href="#" th:href="@{/}">Home</a></p>
+    </main>
     <div th:include="fragments/links :: div.bottom-links"></div>
     <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>
