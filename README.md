@@ -1,5 +1,7 @@
 # BoardgameListingWebApp
 
+Click [HERE](http://ec2-18-116-69-84.us-east-2.compute.amazonaws.com/) to try the app! (Still working on the UI design improvement 🤭)
+
 ## Description
 
 **Board Game Database Full-Stack Web Application.**
@@ -9,6 +11,7 @@ This web application displays lists of board games and their reviews. While anyo
 
 - Java
 - Spring Boot
+- Amazon Web Services(AWS) EC2
 - Thymeleaf
 - Thymeleaf Fragments
 - HTML5
@@ -33,6 +36,7 @@ This web application displays lists of board games and their reviews. While anyo
   - Non-members only can see the boardgame lists and reviews
   - Users can add board games and write reviews
   - Managers can edit and delete the reviews
+- Deployed the application on AWS EC2
 - JUnit test framework for unit testing
 - Spring MVC best practices to segregate views, controllers, and database packages
 - JDBC for database connectivity and interaction
