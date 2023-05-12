@@ -78,16 +78,17 @@ public class DatabaseAccess {
 
     public Long addBoardGame(BoardGame boardgame) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        String query = "INSERT INTO boardgames (name, level, minPlayers, maxPlayers) VALUES (:name, :level, :minPlayers, :maxPlayers)";
+        String query = "INSERT INTO boardgames (name, level, minPlayers, maxPlayers, gameType) VALUES (:name, :level, :minPlayers, :maxPlayers, :gameType)";
         namedParameters
                 .addValue("name", boardgame.getName())
                 .addValue("level", boardgame.getLevel())
                 .addValue("minPlayers", boardgame.getMinPlayers())
-                .addValue("maxPlayers", boardgame.getMaxPlayers());
+                .addValue("maxPlayers", boardgame.getMaxPlayers())
+                .addValue("gameType", boardgame.getGameType());
         KeyHolder generatedKey = new GeneratedKeyHolder();
         int returnValue = jdbc.update(query, namedParameters, generatedKey);
-        Long studentId = (Long) generatedKey.getKey();
-        return (returnValue > 0) ? studentId : 0;
+        Long boardGameId = (Long) generatedKey.getKey();
+        return (returnValue > 0) ? boardGameId : 0;
     }
 
     public int addReview(Review review) {

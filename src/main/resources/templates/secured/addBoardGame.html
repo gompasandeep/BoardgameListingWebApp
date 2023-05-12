@@ -45,6 +45,13 @@
                             <option value="+">+</option>
                         </select>
                         <br><br>
+                        Game Type:
+                        <select id="gameType" name="gameType" th:field="*{gameType}">
+                            <option value="Party Game">Party Game</option>
+                            <option value="Trivia Game">Trivia Game</option>
+                            <option value="Strategy Game">Strategy Game</option>
+                        </select>
+                        <br><br>
                         <input type="submit" value="Submit the boardgame" class="btn btn-primary m-2 pb-2">
                     </form>
                 </div>

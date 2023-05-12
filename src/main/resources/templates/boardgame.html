@@ -19,10 +19,11 @@
                         th:text="|Players: ${boardgame.minPlayers} + Players|">
                         Players
                     </div>
-                    <div class="h5 py-3"><a href="#" th:href="@{|/${boardgame.id}/reviews|}">Click Here</a> to
-                        check
-                        the
-                        user reviews</div>
+                    <div class="h5 py-3" th:text="|Game Type: ${boardgame.gameType}|">
+                        Game Type
+                    </div>
+                    <div class="h5 py-3"><a href="#" th:href="@{|/${boardgame.id}/reviews|}">Click Here</a> for user
+                        reviews</div>
                 </div>
 
                 <div sec:authorize="!hasRole('ROLE_USER')">

@@ -3,7 +3,8 @@ create table boardgames (
   name    VARCHAR(128) NOT NULL,
   level   INT NOT NULL,
   minPlayers INT NOT NULL,
-  maxPlayers VARCHAR(50) NOT NULL
+  maxPlayers VARCHAR(50) NOT NULL,
+  gameType VARCHAR(50) NOT NULL
 );
 
 create table reviews (
@@ -17,11 +18,14 @@ alter table reviews
   add constraint game_review_fk foreign key (gameId)
   references boardgames (id);
 
-insert into boardgames (name, level, minPlayers, maxPlayers)
-values ('Splendor', 3, 2, '4');
+insert into boardgames (name, level, minPlayers, maxPlayers, gameType)
+values ('Splendor', 3, 2, '4', 'Strategy Game');
  
-insert into boardgames (name, level, minPlayers, maxPlayers)
-values ('Clue', 2, 1, '6'); 
+insert into boardgames (name, level, minPlayers, maxPlayers, gameType)
+values ('Clue', 2, 1, '6', 'Strategy Game'); 
+
+insert into boardgames (name, level, minPlayers, maxPlayers, gameType)
+values ('Linkee', 1, 2, '+', 'Trivia Game'); 
  
 insert into reviews (gameId, text)
 values (1, 'A great strategy game. The one who collects 15 points first wins. Calculation skill is required.');
