@@ -14,12 +14,16 @@
 </head>
 
 <body>
-    <div th:replace="fragments/links :: div.header-links"></div>
+    <nav th:replace="fragments/links :: nav.navigation-links"></nav>
     <main class="container">
-        <div class="p-4 p-md-5 mb-4 border rounded text-center">
+        <div class="p-4 p-md-5 mb-4 text-center">
             <h1 class="my-2 pb-3">Add a User</h1>
 
-            <div id="error" class="error"></div>
+            <div id="error" class="error">
+                <div th:if="${errorMsg}">
+                    <p th:text="${errorMsg}"></p>
+                </div>
+            </div>
 
             <form name="form" action="#" th:action="@{/addUser}" method="post" onsubmit="return verify()">
                 <div class="form-group row justify-content-center my-2">
@@ -32,7 +36,7 @@
                 <div class="form-group row justify-content-center my-2">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
                     <div class="col-sm-4">
-                        <input type="text" name="password" class="form-control" id="inputPassword"
+                        <input type="password" name="password" class="form-control" id="inputPassword"
                             placeholder="Enter Password">
                     </div>
                 </div>
@@ -45,10 +49,11 @@
                 <input type="submit" value="Add User" class="btn btn-primary m-2 pb-2">
             </form>
             <div class="container text-center my-2">
-                <h5><a href="/" th:href="@{/}">Back to Home</a></h5>
+                <p class="lead"><a href="/" th:href="@{/}">Back to Home</a></p>
             </div>
         </div>
     </main>
+    <div class="b-example-divider border border-light"></div>
     <div th:include="fragments/links :: div.bottom-links"></div>
     <div th:replace="fragments/footer.html :: page-footer"></div>
 </body>
