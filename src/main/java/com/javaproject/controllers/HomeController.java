@@ -46,8 +46,7 @@ public class HomeController {
     @PostMapping("/addUser")
     public String addUser(@RequestParam String userName, @RequestParam String password,
             @RequestParam String[] authorities, Model model) {
-        // if the username does not exist in database
-        // if (da.userNameNotExist(userName)) {
+
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
         for (String authority : authorities) {
@@ -56,16 +55,19 @@ public class HomeController {
         String encodedPassword = passwordEncoder.encode(password);
 
         // check existing user
-        User user = new User(userName, encodedPassword, authorityList);
+        if (jdbcUserDetailsManager.userExists(userName)) {
+            model.addAttribute("errorMsg", "User name already Exists. Try a different user name");
+            model.addAttribute("authorities", authorityList);
+            return "new-user";
+        } else {
+            User user = new User(userName, encodedPassword, authorityList);
 
-        jdbcUserDetailsManager.createUser(user);
+            jdbcUserDetailsManager.createUser(user);
 
-        model.addAttribute("message", "User succesfully added");
-        // return "/secured/gateway";
-        // } else {
-        // System.out.println("User already exists");
-        // }
-        return "redirect:/";
+            model.addAttribute("message", "User succesfully added");
+
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/")
@@ -93,7 +95,7 @@ public class HomeController {
         model.addAttribute("boardgame", da.getBoardGame(id));
         model.addAttribute("review", new Review());
 
-        return "/secured/addReview";
+        return "secured/addReview";
     }
 
     // edit the review
@@ -102,13 +104,13 @@ public class HomeController {
         Review review = da.getReview(id);
         model.addAttribute("review", review);
         model.addAttribute("boardgame", da.getBoardGame(gameId));
-        return "/secured/addReview";
+        return "secured/addReview";
     }
 
     @GetMapping("/secured/addBoardGame")
     public String addBoardGame(Model model) {
         model.addAttribute("boardgame", new BoardGame());
-        return "/secured/addBoardGame";
+        return "secured/addBoardGame";
     }
 
     @PostMapping("/boardgameAdded")
@@ -143,17 +145,17 @@ public class HomeController {
 
     @GetMapping("/user")
     public String goToUserSecured() {
-        return "/secured/user/index";
+        return "secured/user/index";
     }
 
     @GetMapping("/manager")
     public String goToManagerSecured() {
-        return "/secured/manager/index";
+        return "secured/manager/index";
     }
 
     @GetMapping("/secured")
     public String goToSecured() {
-        return "/secured/gateway";
+        return "secured/gateway";
     }
 
     @GetMapping("/login")
@@ -163,6 +165,6 @@ public class HomeController {
 
     @GetMapping("/permission-denied")
     public String goToDenied() {
-        return "/error/permission-denied";
+        return "error/permission-denied";
     }
 }
