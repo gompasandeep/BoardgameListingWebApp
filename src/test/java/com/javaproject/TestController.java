@@ -53,6 +53,7 @@ class TestController {
         requestParams.add("level", "1");
         requestParams.add("minPlayers", "2");
         requestParams.add("maxPlayers", "+");
+        requestParams.add("gameType", "Party Game");
 
         int origSize = da.getBoardGames().size();
         mockMvc.perform(post("/boardgameAdded").params(requestParams))

@@ -31,6 +31,7 @@ class TestDatabase {
         boardGame.setLevel(1);
         boardGame.setMinPlayers(2);
         boardGame.setMaxPlayers("+");
+        boardGame.setGameType("Party Game");
 
         int originalSize = da.getBoardGames().size();
 
