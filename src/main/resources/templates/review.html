@@ -27,12 +27,16 @@
                             <td>
                                 <a sec:authorize="hasRole('ROLE_MANAGER')" href="#"
                                     th:href="@{|/${boardgame.id}/reviews/${review.id}|}">Edit</a>
-                                <p sec:authorize="!hasRole('ROLE_MANAGER')" title="no authorization">-</p>
+                                <p sec:authorize="!hasRole('ROLE_MANAGER')" title="Manager Role required"
+                                    class="text-secondary">Edit
+                                </p>
                             </td>
                             <td>
                                 <a sec:authorize="hasRole('ROLE_MANAGER')" href="#"
                                     th:href="@{/deleteReview/}+${review.id}">Delete</a>
-                                <p sec:authorize="!hasRole('ROLE_MANAGER')" title="no authorization">-</p>
+                                <p sec:authorize="!hasRole('ROLE_MANAGER')" title="Manager Role required"
+                                    class="text-secondary">
+                                    Delete</p>
                             </td>
                         </tr>
                     </tbody>
