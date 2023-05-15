@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" data-bs-theme="light">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" data-bs-theme="light">
+
 
 <head th:replace="fragments/header.html :: html-head(title='Boardgame Home')"></head>
 
 <body>
     <nav th:replace="fragments/links :: nav.navigation-links"></nav>
+
     <main class="container">
         <div class="p-4 p-md-5 mb-4 text-center">
             <div class="container col-md-6">
                 <h1>Boardgame Lists</h1>
+
+                <div id="error" class="error pt-3">
+                    <div th:if="${userAddedMsg}">
+                        <p th:text="${userAddedMsg}"></p>
+                    </div>
+                </div>
+
                 <div th:unless="${boardgames.empty}" class="py-3 my-3">
                     <div class="list-group d-flex flex-wrap justify-content-center" th:each="boardgame : ${boardgames}">
                         <a href="#" th:href='@{|/${boardgame.id}|}'

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javaproject.beans.BoardGame;
 import com.javaproject.beans.Review;
@@ -45,7 +46,7 @@ public class HomeController {
 
     @PostMapping("/addUser")
     public String addUser(@RequestParam String userName, @RequestParam String password,
-            @RequestParam String[] authorities, Model model) {
+            @RequestParam String[] authorities, Model model, RedirectAttributes redirectAttrs) {
 
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
@@ -63,9 +64,7 @@ public class HomeController {
             User user = new User(userName, encodedPassword, authorityList);
 
             jdbcUserDetailsManager.createUser(user);
-
-            model.addAttribute("message", "User succesfully added");
-
+            redirectAttrs.addFlashAttribute("userAddedMsg", "User succesfully added!");
             return "redirect:/";
         }
     }
