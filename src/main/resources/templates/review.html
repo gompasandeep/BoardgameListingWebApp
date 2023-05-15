@@ -46,7 +46,7 @@
                 <p class="lead">** Only the users with manager role can edit/ delete the reviews **</p>
             </div>
             <div sec:authorize="!hasRole('ROLE_USER')">
-                <p class="lead">To write reviews, please login <a href="#" th:href="@{/secured}">here</a></p>
+                <p class="lead">To write reviews, please login <a href="#" th:href="@{/secured}">Here</a></p>
             </div>
             <div sec:authorize="hasRole('ROLE_USER')">
                 <p class="lead"><a href="#" th:href="@{/secured/addReview/}+${boardgame.id}">Add a Review!</a></p>
