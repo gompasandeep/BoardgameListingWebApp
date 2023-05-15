@@ -1,6 +1,6 @@
 # BoardgameListingWebApp
 
-Click [HERE](http://ec2-18-116-69-84.us-east-2.compute.amazonaws.com:8080/) to try the app! (Still working on the UI design improvement 🤭)
+Click [HERE](http://ec2-18-116-69-84.us-east-2.compute.amazonaws.com:8080/) to try the app!
 
 ## Description
 
