@@ -1,13 +1,13 @@
-name: Build Maven  Application
+name: Build Maven Application
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "develop" ]
   
 jobs:
   build:
 
-    runs-on: Rhel lastest
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v3
